@@ -36,11 +36,11 @@ class InputData {
         if (!isset($this->_input_data)) {
             $stream = $this->getInputStream();
             if (isset($_SERVER['CONTENT_LENGTH']) && $_SERVER['CONTENT_LENGTH'] <= 4096) {
-                $this->_input_data = fread($stream, $_SERVER['CONTENT_LENGTH']);
+                $this->_input_data = @fread($stream, $_SERVER['CONTENT_LENGTH']);
             } else {
                 $this->_input_data = '';
                 while (!feof($stream)) {
-                    $this->_input_data .= fread($stream, 4096);
+                    $this->_input_data .= @fread($stream, 4096);
                 }
             }
         }
